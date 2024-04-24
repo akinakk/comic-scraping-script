@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XKCD Comics</title>
+</head>
+
+<body>
+    <div id="comics"></div>
+
+    <script>
+        async function fetchComics() {
+            try {
+                const response = await fetch('http://localhost:3000/comics');
+                const comics = await response.json();
+
+                const comicsDiv = document.getElementById('comics');
+                comics.forEach(imageUrl => {
+                    const img = document.createElement('img');
+                    img.src = imageUrl;
+                    comicsDiv.appendChild(img);
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        fetchComics();
+    </script>
+</body>
+
+</html>
